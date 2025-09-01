@@ -26,12 +26,15 @@ const checkWin = ()=>{
     ]
     wins.forEach(e =>{
        if((boxtext[e[0]].innerText === boxtext[e[1]].innerText) && (boxtext[e[2]].innerText === boxtext[e[1]].innerText) &&(boxtext[e[0]].innerText !== "")){
-        document.querySelector('.info').innerText = boxtext[e[0]].innerText + "Won"
+        document.querySelector('.info').innerText = boxtext[e[0]].innerText +"Won"
+        isgameover=true;
+        document.querySelector(".imgbox").style.display = "block";
+
        }
     })
 }
 
-
+music.play();
 let boxes = document.getElementsByClassName("box");
 Array.from(boxes).forEach(element =>{
     let boxtext = element.querySelector('.boxtext');
@@ -49,4 +52,21 @@ Array.from(boxes).forEach(element =>{
 })
 
 
+
+document.getElementById('reset').addEventListener('click', ()=>{
+    let boxtexts = document.querySelectorAll('.boxtext');
+    Array.from(boxtexts).forEach(element => {
+
+        element.innerText = ""
+    });
+    // Remove win highlights
+    let winBoxes = document.querySelectorAll('.win');
+    Array.from(winBoxes).forEach(box => {
+        box.classList.remove('win');
+    });
+    turn = "X";
+    isgameover = false;
+    document.getElementsByClassName("info")[0].innerText  = "Turn for " + turn;
+    document.querySelector(".imgbox").style.display="none";
+})
 
